@@ -1,0 +1,36 @@
+---
+#K8s YAML Spec file for pgAdmin4 - a PostgreSQL Admin Tool
+#Author: PNT@22Feb2022
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bu-deploy-pgadmin
+  labels:
+    type: deploy-db-tools
+spec:
+  selector:
+    matchLabels:
+      tier: database
+      group: mgmt-tools
+  
+  replicas: 1
+
+  template:
+    metadata:
+      name: bu-pgadmin-pod
+      labels:
+        name: bu-pgadmin-pod
+        tier: database
+        group: mgmt-tools
+    spec:
+      containers:
+        - name: bu-pgadmin-con
+          image: dpage/pgadmin4
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: 'admin@pgadmin.com'
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: 'adminpgadmin'
+          ports:
+            - containerPort: 80
+...

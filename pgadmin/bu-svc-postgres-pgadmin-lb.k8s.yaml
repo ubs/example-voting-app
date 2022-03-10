@@ -1,0 +1,24 @@
+---
+#K8s YAML Spec file for a PostgreSQL PG Admin Service
+#NodePort Service
+#Author: PNT@10Mar2022
+apiVersion: v1
+kind: Service
+metadata:
+  name: bu-pgadmin-service
+  labels:
+    name: bu-pgadmin-service
+    createdby: PNT
+
+spec:
+  type: LoadBalancer
+
+  ports:
+    - port: 80
+      targetPort: 80
+  
+  selector:
+    name: bu-pgadmin-pod
+    tier: database
+    group: mgmt-tools
+...

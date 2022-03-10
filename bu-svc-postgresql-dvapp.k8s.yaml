@@ -1,0 +1,20 @@
+---
+#K8s YAML Spec file for a PostgreSQL Service
+#ClusterIP Service
+#Author: PNT@09Mar2022
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    createdby: PNT
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  
+  selector:
+    name: postgres-pod
+    app: demo-voting-app
+...

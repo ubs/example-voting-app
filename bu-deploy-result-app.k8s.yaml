@@ -1,0 +1,30 @@
+---
+#K8s YAML Spec file for a simple voting result app (part of a Microservices stack) deployment
+#Author: PNT@09Mar2022
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app-deployment
+  labels:
+    createdby: PNT
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      name: result-app-pod
+  
+  template:
+    metadata:
+      name: result-app-pod
+      labels:
+        name: result-app-pod
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: result-app
+          image: kodekloud/examplevotingapp_result:v1
+          ports:
+            - containerPort: 80
+...
